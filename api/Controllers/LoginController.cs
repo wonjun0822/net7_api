@@ -27,7 +27,7 @@ namespace net7_api.Controllers
         [Route("Test")]
         public string Test()
         {
-            return "Test";
+            return Configuration["SqlConnection:MySQL"].ToString();
         }
 
         [HttpPost]
