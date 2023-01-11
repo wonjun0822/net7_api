@@ -58,7 +58,7 @@ jobs:
   deploy:
     needs: build
     name: Deploy
-    runs-on: [ self-hosted, net7-api ]
+    runs-on: [ net7-api ]
     steps:
       - name: Login to ghcr
         uses: docker/login-action@v1
