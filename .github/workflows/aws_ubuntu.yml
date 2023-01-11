@@ -1,4 +1,4 @@
-name: api build Test
+name: net7_api CI/CD
 
 on:
   push:
