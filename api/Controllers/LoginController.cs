@@ -25,9 +25,9 @@ namespace net7_api.Controllers
 
         [HttpGet]
         [Route("Test")]
-        public string Test()
+        public string? Test()
         {
-            return Configuration["SqlConnection:MySQL"].ToString();
+            return Configuration["SqlConnection:MySQL"];
         }
 
         [HttpPost]
