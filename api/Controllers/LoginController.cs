@@ -23,13 +23,6 @@ namespace net7_api.Controllers
 
         string? TryGetMessage(string t) => "";
 
-        [HttpGet]
-        [Route("Test")]
-        public string? Test()
-        {
-            return Configuration["SqlConnection:MySQL"];
-        }
-
         [HttpPost]
         [Route("login")]
         public string Login(string id)
