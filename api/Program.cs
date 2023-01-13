@@ -24,7 +24,7 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidAudience = builder.Configuration.GetSection("TokenSettings").GetValue<string>("Audience"),
         ValidIssuer = builder.Configuration.GetSection("TokenSettings").GetValue<string>("Issuer"),
-        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(builder.Configuration.GetSection("TokenSettings").GetValue<string>("Key"))),
+        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(builder.Configuration.GetSection("TokenSettings").GetValue<string>("Key")!)),
         RequireExpirationTime = true
     };
     options.RequireHttpsMetadata = false;
