@@ -25,7 +25,7 @@ namespace net7_api.Controllers
 
         [HttpPost]
         [Route("login")]
-        public string Login(string id)
+        public string Login(string? id)
         {
             DataSet ds = new DataSet();
 
@@ -61,7 +61,7 @@ namespace net7_api.Controllers
                                     //expires: DateTime.Now.AddMinutes(10),
                                     signingCredentials: credentials,
                                     claims: new Claim[] {
-                                        new Claim(ClaimTypes.NameIdentifier, id),
+                                        new Claim(ClaimTypes.NameIdentifier, id!),
                                         new Claim("auth", TryGetMessage(ds.Tables[0].Rows[0]["auth"].ToString()!)!)
                                     }
                                 );
@@ -73,7 +73,7 @@ namespace net7_api.Controllers
                 }
             }
 
-            catch (Exception)
+            catch
             {
                 throw;
             }
