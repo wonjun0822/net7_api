@@ -1,4 +1,4 @@
-name: net7_api CI/CD
+name: net7_api CI/CD 
 
 on:
   push:
