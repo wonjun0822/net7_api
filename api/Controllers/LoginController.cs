@@ -25,7 +25,7 @@ namespace net7_api.Controllers
 
         [HttpPost]
         [Route("login")]
-        public string Login(string? id)
+        public async Task<string> Login(string? id)
         {
             DataSet ds = new DataSet();
 
@@ -35,7 +35,7 @@ namespace net7_api.Controllers
             {
                 using (MySqlConnection conn = new MySqlConnection(Configuration["SqlConnection:MySQL"]))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
 
                     using (MySqlCommand cmd = new MySqlCommand("SP_Login", conn))
                     {
@@ -45,7 +45,7 @@ namespace net7_api.Controllers
 
                         using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                         {
-                            da.Fill(ds);
+                            await da.FillAsync(ds);
 
                             if (ds != null && ds.Tables[0].Rows.Count > 0)
                             {
