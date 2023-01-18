@@ -9,15 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.WebHost.ConfigureKestrel(options => {
-    options.ListenAnyIP(8000, (opt) => {
-        opt.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
-    });
-    options.ListenAnyIP(8001, (opt) => {
-        opt.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
-        opt.UseHttps();
-    });
-});
+// builder.WebHost.ConfigureKestrel(options => {
+//     options.ListenAnyIP(8000, (opt) => {
+//         opt.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
+//     });
+//     options.ListenAnyIP(8001, (opt) => {
+//         opt.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
+//         opt.UseHttps();
+//     });
+// });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddEndpointsApiExplorer();
@@ -52,7 +52,7 @@ builder.Services.AddAuthorization(options =>
 // builder.Services.AddHttpsRedirection(options => 
 // {
 //     options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
-//     options.HttpsPort = 5001;
+//     options.HttpsPort = 8001;
 // });
 
 var app = builder.Build();
@@ -64,8 +64,8 @@ var app = builder.Build();
 //     app.UseSwaggerUI();
 // }
 
-//app.UseHsts();
-//app.UseHttpsRedirection();
+app.UseHsts();
+app.UseHttpsRedirection();
 
 app.UseCors(x => x
     .AllowAnyMethod()
