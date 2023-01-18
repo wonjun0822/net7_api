@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
 using System.Data;
-using System.Text.Json;
+//using System.Text.Json;
+using Newtonsoft.Json;
+
+using net7_api.Class;
 
 namespace net7_api.Controllers
 {
@@ -50,8 +53,7 @@ namespace net7_api.Controllers
                 throw;
             }
 
-            //MemoryPack.MemoryPackSerializer.Serialize(ds.Tables[0]).TO
-            return JsonSerializer.Serialize(ds.Tables[0]);
+            return JsonConvert.SerializeObject(ds.Tables[0]);
         }
     }
 }

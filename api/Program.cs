@@ -8,6 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.WebHost.ConfigureKestrel(options => {
+    options.ListenAnyIP(8000, (opt) => {
+        opt.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
+    });
+    options.ListenAnyIP(8001, (opt) => {
+        opt.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2;
+        opt.UseHttps();
+    });
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
@@ -38,11 +49,11 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy => policy.RequireClaim("auth", "System Admin"));
 });
 
-builder.Services.AddHttpsRedirection(options => 
-{
-    options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
-    options.HttpsPort = 5001;
-});
+// builder.Services.AddHttpsRedirection(options => 
+// {
+//     options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
+//     options.HttpsPort = 5001;
+// });
 
 var app = builder.Build();
 
@@ -54,7 +65,7 @@ var app = builder.Build();
 // }
 
 //app.UseHsts();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors(x => x
     .AllowAnyMethod()
